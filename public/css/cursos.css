@@ -1,0 +1,37 @@
+section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 1em;
+    padding: 50px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.img-constructions {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-constructions img {
+    width: 100%;
+}
+
+
+@media (max-width: 500px){
+    h2 {
+        font-size: 25px
+    }
+.img-constructions {
+    width: 100%;
+}
+}

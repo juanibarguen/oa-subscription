@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suscripción a Ungated</title>
+</head>
+<body>
+  <h1>Suscripción a Ungated</h1>
+  <form id="subscriptionForm">
+    <label for="firstName">Nombre:</label><br>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+    
+    <label for="lastName">Apellido:</label><br>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+    
+    <label for="email">Correo electrónico:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <button type="submit">Suscribirse</button>
+  </form>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+  <script>
+    const subscriptionForm = document.getElementById('subscriptionForm');
+  
+    subscriptionForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+  
+      const formData = new FormData(subscriptionForm);
+      const subscriber = {
+        name: {
+          given_name: formData.get('firstName'),
+          surname: formData.get('lastName')
+        },
+        email_address: formData.get('email')
+      };
+  
+      try {
+        const response = await axios.post('http://localhost:3000/createSubscription', {
+          plan_id: 'P-8F657959JV786050PMZGM32I', // Reemplaza con el ID de tu plan
+          subscriber: subscriber
+        });
+  
+        console.log('Subscription created:', response.data);
+        window.location.href = response.data.redirect_url; // Redirigir al usuario a PayPal
+      } catch (error) {
+        console.error('Error creating subscription:', error.response ? error.response.data : error.message);
+        alert('Error al crear la suscripción. Por favor, inténtalo de nuevo más tarde.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+
+.week-free {
+    padding: 50px 200px;
+    display: flex;
+}
+.form-week-free {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.form-week-free p {
+    text-align: center;
+}
+
+.form-week-free form button {
+    height: 40px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.image-week-free {
+    width: 50%;
+    border: 1px solid black;
+    display: flex;
+}
+
+.image-week-free img {
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+
+
+.container-servicios {
+    padding: 50px 200px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(48, 48, 48); */
+}
+
+.text-servicios {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.text-servicios h2 {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.text-servicios p {
+    padding: 25px 0;
+    font-weight: 300;
+}
+
+.select-plan p {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 20px 0;
+    color: #f1f1f1;
+}
+
+.choose-plan {
+    text-align: center;
+    padding: 10px 0 25px;
+    font-size: 20px;
+}
+
+
+.card-top {
+    padding: 10px;
+    background: #F7F8FC;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.card-under {
+    background-color: #fff;
+}
+
+.card-under ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    padding: 15px 25px;
+    align-items: center ;
+}
+
+.card-under ul li {
+    font-size: 16px;
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    text-align: center;
+}
+
+.card-under ul li svg {
+    height: 12px;
+}
+
+.card-under-cta {
+    /* padding: 10px; */
+    border-radius: 10px;
+    width: 60%;
+    text-align: center;
+    background: #10182F
+}
+
+.card-under-cta a {
+    text-decoration: none;
+    color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+}
+
+.card-top-img span {
+    font-size: 50px;
+}
+
+
+
+.title-card {
+    font-size: 18px;
+    font-weight: 400;
+    color: #10182F;
+}
+
+.price-card {
+    font-weight: 900;
+    font-size: 25px;
+    color: #10182F;
+}
+
+.card-under-cta a p {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card-top-img span {
+    color: #10182F;
+}
+
+.container-cards {
+    display: flex;
+    column-gap: 2em;
+    justify-content: space-between;
+}
+
+.card {
+    border: 1px solid black;
+}
+
+.text-personalizada {
+    padding: 0 200px;
+}
+
+.form-group input {
+    height: 40px;
+    padding: 10px 0 20px;
+}
+
+.form-group-select {
+    padding: 10px 0;
+}
+.form-group select {
+    height: 40px;
+}
+
+
+
+@media (max-width:1100px) {
+    .text-personalizada {
+        padding: 0 100px;
+    }
+    .container-servicios {
+        padding: 50px 100px;
+    }
+    .week-free {
+        padding: 50px 100px;
+    }
+} 
+
+@media (max-width:950px) {
+
+    .week-free {
+        padding: 50px 30px;
+    }
+    .container-servicios {
+        padding: 50px 30px;
+    }
+    .text-personalizada {
+        padding: 0 30px;
+    }
+    .container-cards {
+        column-gap: 1em;
+    }
+    .card-under ul li {
+        font-size: 12px;
+    }
+    .card-under ul {
+        font-size: 10px;
+    }
+
+    
+}
+
+@media (max-width:768px) {
+
+    .week-free {
+        padding: 50px 65px;
+    }
+
+    .form-week-free {
+        width: 100%;
+    }
+    .image-week-free {
+        display: none;
+    }
+    .image-week-free {
+        display: none;
+    }
+
+    .container-cards {
+        flex-direction: column;
+        padding: 0 35px;
+        row-gap: 1em;
+    }
+
+    .text-personalizada {
+        padding: 0 70px;
+    }
+    /* .choose-plan {
+        padding: 0 35px;
+    } */
+    .text-servicios {
+        padding: 100px 30px 0;
+    }
+}
+
+@media (max-width: 450px){
+    .container-servicios {
+        padding: 30px 0px;
+        }
+
+    .week-free {
+        padding: 30px 35px;
+    }
+    .text-personalizada {
+        padding: 0 35px;
+        font-size: 14px;
+    }
+}

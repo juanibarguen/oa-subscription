@@ -1,0 +1,476 @@
+
+
+
+
+.seccion {
+    padding-top: 100px;
+}
+/* box */
+.titulo-principal {
+    font-size: 65px;
+    padding: 10px 0 20px;
+    font-weight: 900;
+}
+
+.subtitulo-principal {
+    font-size: 45px;
+    font-weight: 200;
+}
+
+.parrafo-principal {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.contenido  {
+    color:#293343;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contenido button {
+    padding: 20px 40px;
+}
+
+
+.seccion {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+  }
+  
+  .contenido,
+  .imagen {
+    flex: 1;
+  }
+  
+  .contenido {
+    padding: 20px;
+  }
+  
+  .imagen {
+    padding: 20px;
+  }
+  
+  .imagen img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+/* ------------------------------------------------- */
+
+
+.container-principal-img img {
+    width: 500px;
+}
+
+.principal {
+    padding: 50px 100px;
+}
+
+
+
+.principal h1 {
+    font-size: 50px;
+    padding: 10px 0;
+}
+.principal p {
+    font-size: 20px;
+    padding: 0 0 20px;
+}
+
+
+.container-principal {
+    display: flex;
+}
+
+.container-principal-text {
+    width: 500px;
+}
+
+.container-principal-text h2 {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.container-principal-text p {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+
+/* asdasdasdasdasdddddddddddddddddddddddd */
+
+
+.container-acerca-de-nosotros {
+    color:#293343;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-acerca-de-nosotros h2 {
+    padding: 1em;
+}
+
+.acerca-de-nosotros {
+    display: flex;
+    column-gap: 1em;
+    padding: 1em;
+    /* border: 1px solid black; */
+}
+
+.acerca-de-nosotros {
+    max-width: 1200px;
+}
+
+.acerca-de-nosotros-card {
+    text-align: center;
+    padding: 1em;
+    border: 1px solid black;
+}
+
+.acerca-de-nosotros-card h3 {
+    padding-bottom: 1em;
+}
+
+.acerca-de-nosotros-card p {
+    font-size: 12px;
+}
+/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
+
+
+
+.container-que-ofrecemos {
+    color:#293343;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 0;
+}
+
+.que-ofrecemos {
+    max-width: 1200px;
+    display: flex;
+    column-gap: 1em;
+    row-gap: 1em;
+    padding: 1em;
+    /* border: 1px solid black; */
+    flex-direction: column;
+}
+.que-ofrecemos-card {
+    text-align: center;
+    padding: 1em;
+    border: 1px solid black;
+    display: flex;
+    /*height: 300px;*/
+}
+
+.que-ofrecemos-card img {
+    width: 400px;
+}
+
+.que-ofrecemos-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-two {
+    flex-direction: row-reverse;
+    /* text-align: end; */
+}
+
+
+
+/* NESSSSSSSSSSSSSSSSSSSSLETER */
+
+.newsletter-img {
+    max-width: 500px;
+    /* height: 200px; */
+    background-color: #f2f2f2;
+}
+
+.container-index-newsletter {
+    color:#293343;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 2em 0; */
+}
+
+.container-aprende {
+    color: #293343;
+}
+
+.index-newsletter {
+    color: #293343;
+    max-height: 235px;
+    display: flex;
+    max-width: 1200px;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.index-newsletter-text h4 {
+    font-size: 23px;
+    font-weight: 300;
+}
+
+.index-newsletter-text p {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.index-newsletter-text {
+    padding: 0 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.index-newsletter-img {
+    width: 100%;
+    text-align: center;
+}
+
+.index-newsletter-img img {
+    width: 350px;
+}
+
+.index-newsletter-cta input {
+    height: 40px;
+}
+
+.index-newsletter-cta button {
+    height: 40px;
+    padding: 10px 20px;
+}
+
+
+/* APRENDE CON NOSOTROS */
+
+.contenedor {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 20px; /* Ajusta el valor según lo necesites */
+    box-sizing: border-box; /* Para incluir el padding en el ancho total del contenedor */
+  }
+
+.container-aprende p {
+    text-align: center;
+    padding: 0 35px;
+    font-size: 35px;
+}
+  
+  .contenedor img {
+    width: 50%;
+    height: auto;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+
+
+/* FAQQQQQQQQQQQQQQQQQQQQQQQQQ */
+.faq-section {
+    color: #293343;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .title-faq {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+  
+  .faq-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .pregunta {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .pregunta-titulo {
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .respuesta {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    /* transition: max-height 0.91s ease;  */
+  }
+  
+  .respuesta.active {
+    max-height: 1000px; /* Altura máxima que quieres que tenga la respuesta desplegada */
+    min-height: 30px;
+  }
+
+  
+
+  @media screen and (max-width: 1000px) {
+
+    .que-ofrecemos-card img {
+        width: 300px;
+    }
+
+
+    .titulo-principal {
+        padding: 0 ;
+        font-size: 45px;
+    }
+
+    .parrafo-principal {
+        font-size: 25px;
+    }
+
+    .subtitulo-principal {
+        font-size: 30px;
+    }
+
+    .imagen {
+        display: flex;
+    }
+  }
+
+  @media screen and (max-width: 790px) {
+    .index-newsletter-img {
+        display: none;
+    }
+    .index-newsletter-text {
+        row-gap: 12px;
+    }
+  }
+
+
+  @media screen and (max-width: 600px) {
+    .contenedor {
+        flex-direction: column;
+    }
+    .contenedor img {
+        width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 670px) {
+
+    .index-newsletter-text h4 {
+        font-size: 20px;
+    }
+
+    .imagen {
+        display: none;
+    }
+
+
+    .contenido {
+        align-items: center;
+        row-gap: 1.5em;
+    }
+
+    .parrafo-principal {
+        text-align: center;
+    }
+
+    .container-acerca-de-nosotros h2 {
+        padding: 1em 1em 0;
+    }
+
+    .acerca-de-nosotros {
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    .acerca-de-nosotros-card {
+        width: 100%;
+    }
+
+    .acerca-de-nosotros-card img{
+        width: 60%;
+    }
+
+    .index-newsletter {
+        flex-direction: column-reverse;
+        padding: 1em 2em;
+    }
+
+    .index-newsletter-cta input {
+        width: 70%;
+    }
+
+    .index-newsletter-cta button {
+        width: 30%;
+        padding: 5px;
+    }
+
+
+
+    .index-newsletter-text {
+        padding: 0;
+        row-gap: 10px;
+    }
+
+  }
+
+  @media screen and (max-width: 560px) {
+    .que-ofrecemos-card img {
+        width: 200px;
+    }
+
+    .que-ofrecemos-text p {
+        font-size: 14px;
+    }
+        
+  } 
+
+
+
+
+  @media screen and (max-width: 444px){
+
+    .logo-img-letras {
+        display: none;
+    }
+
+    .container-aprende p {
+        font-size: 22px;
+    }
+
+    .nav {
+        padding: 7px 20px;
+    }
+
+    .que-ofrecemos-card {
+        flex-direction: column;
+        padding: 0 10px 1em 10px;
+    }
+
+    .que-ofrecemos-card img {
+        width: 100%;
+    }
+  }
+
+
+  .right, .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left {
+    padding-right: 2px;
+  }
+
+  .right {
+    padding-left: 2px;
+  }
