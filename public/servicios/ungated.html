@@ -3,55 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suscripción a Ungated</title>
+  <title>Subscribe to Ungated Plan</title>
 </head>
 <body>
-  <h1>Suscripción a Ungated</h1>
-  <form id="subscriptionForm">
-    <label for="firstName">Nombre:</label><br>
-    <input type="text" id="firstName" name="firstName" required><br><br>
-    
-    <label for="lastName">Apellido:</label><br>
-    <input type="text" id="lastName" name="lastName" required><br><br>
-    
-    <label for="email">Correo electrónico:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    
-    <button type="submit">Suscribirse</button>
+  <h1>Subscribe to Ungated Plan</h1>
+  <form id="subscriptionForm" action="/subscribe-ungated" method="POST">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <button type="submit">Subscribe</button>
   </form>
-
-
   
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
-
   <script>
-    const subscriptionForm = document.getElementById('subscriptionForm');
-  
-    subscriptionForm.addEventListener('submit', async (event) => {
+    document.getElementById('subscriptionForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-  
-      const formData = new FormData(subscriptionForm);
-      const subscriber = {
-        name: {
-          given_name: formData.get('firstName'),
-          surname: formData.get('lastName')
+
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+
+      const response = await fetch(`/subscribe-ungated`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-        email_address: formData.get('email')
-      };
-  
-      try {
-        const response = await axios.post('http://localhost:3000/createSubscription', {
-          plan_id: 'P-8F657959JV786050PMZGM32I', // Reemplaza con el ID de tu plan
-          subscriber: subscriber
-        });
-  
-        console.log('Subscription created:', response.data);
-        window.location.href = response.data.redirect_url; // Redirigir al usuario a PayPal
-      } catch (error) {
-        console.error('Error creating subscription:', error.response ? error.response.data : error.message);
-        alert('Error al crear la suscripción. Por favor, inténtalo de nuevo más tarde.');
+        body: JSON.stringify({ firstName, lastName, email })
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        window.location.href = result.approvalUrl;
+      } else {
+        alert('Failed to create subscription: ' + result.error);
       }
     });
   </script>

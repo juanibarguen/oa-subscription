@@ -7,6 +7,8 @@ const CLIENT_ID = 'ASZO_fqJMSFWWCIvpfDeB2EEbumdOMRlDX4uQIZRDtVufx1yt3xxRzNjJ7pGr
 const CLIENT_SECRET = 'EK_Hsx5hHQPYf0Udb6POgmvLp86P_G9FCqbpRnJtoriCGr13pp4Vem98jjekQ2pQ4Uj7c99wksyoEhK2';
 const PORT = 3000;
 
+let planIds = {};
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -33,12 +35,12 @@ async function getAccessToken() {
   }
 }
 
-async function createProduct() {
+async function createProduct(name, description) {
   try {
     const accessToken = await getAccessToken();
     const productData = {
-      name: "Ungated",
-      description: "Un servicio de listas",
+      name: name,
+      description: description,
       type: "SERVICE",
       category: "SOFTWARE"
     };
@@ -54,70 +56,73 @@ async function createProduct() {
       data: productData,
     });
 
-    console.log('Product created:', response.data);
+    console.log(`${name} product created:`, response.data);
     return response.data.id;
   } catch (error) {
-    console.error('Error creating product:', error.response ? error.response.data : error.message);
-    throw new Error('Failed to create product');
+    console.error(`Error creating ${name} product:`, error.response ? error.response.data : error.message);
+    throw new Error(`Failed to create ${name} product`);
   }
 }
 
-async function createPlan(productId) {
+let ungatedPlanId;
+let mixtaPlanId;
+let exclusivePlanId;
+
+
+async function createPlan(productId, name, description, price1, price2) {
   try {
     const accessToken = await getAccessToken();
     
     const planData = {
-        product_id: productId,
-        name: "Ungated",
-        description: "Un plan de suscripción para el servicio Ungated",
-        billing_cycles: [
-          {
-            frequency: {
-              interval_unit: "MONTH",
-              interval_count: 1
-            },
-            tenure_type: "TRIAL",
-            sequence: 1,
-            total_cycles: 1,
-            pricing_scheme: {
-              fixed_price: {
-                value: "49.99",
-                currency_code: "USD"
-              }
-            }
+      product_id: productId,
+      name: name,
+      description: description,
+      billing_cycles: [
+        {
+          frequency: {
+            interval_unit: "MONTH",
+            interval_count: 1
           },
-          {
-            frequency: {
-              interval_unit: "MONTH",
-              interval_count: 1
-            },
-            tenure_type: "REGULAR",
-            sequence: 2,
-            // Se omite total_cycles o se establece en 0 para duración indefinida
-            pricing_scheme: {
-              fixed_price: {
-                value: "74.99",
-                currency_code: "USD"
-              }
+          tenure_type: "TRIAL",
+          sequence: 1,
+          total_cycles: 1,
+          pricing_scheme: {
+            fixed_price: {
+              value: price1,
+              currency_code: "USD"
             }
           }
-        ],
-        payment_preferences: {
-          auto_bill_outstanding: true,
-          setup_fee: {
-            value: "0",
-            currency_code: "USD"
-          },
-          setup_fee_failure_action: "CONTINUE",
-          payment_failure_threshold: 3
         },
-        taxes: {
-          percentage: "0",
-          inclusive: false
+        {
+          frequency: {
+            interval_unit: "MONTH",
+            interval_count: 1
+          },
+          tenure_type: "REGULAR",
+          sequence: 2,
+          pricing_scheme: {
+            fixed_price: {
+              value: price2,
+              currency_code: "USD"
+            }
+          }
         }
-      };
+      ],
+      payment_preferences: {
+        auto_bill_outstanding: true,
+        setup_fee: {
+          value: "0",
+          currency_code: "USD"
+        },
+        setup_fee_failure_action: "CONTINUE",
+        payment_failure_threshold: 3
+      },
+      taxes: {
+        percentage: "0",
+        inclusive: false
+      }
+    };
       
-
     const response = await axios({
       method: 'post',
       url: 'https://api-m.sandbox.paypal.com/v1/billing/plans',
@@ -129,8 +134,21 @@ async function createPlan(productId) {
       data: planData,
     });
 
-    console.log('Plan created:', response.data);
-    return response.data.id;
+    //console.log('Plan created:', response.data);
+    
+    // Almacenar el ID del plan en la variable correspondiente según el nombre del plan
+    if (name.toLowerCase().includes('ungated')) {
+      ungatedPlanId = response.data.id;
+      console.log(ungatedPlanId);
+    } else if (name.toLowerCase().includes('mixta')) {
+      mixtaPlanId = response.data.id;
+      console.log(mixtaPlanId);
+    } else if (name.toLowerCase().includes('exclusive')) {
+      exclusivePlanId = response.data.id;
+      console.log(exclusivePlanId);
+    }
+    
+    //return response.data.id; // Devolver el ID del plan
   } catch (error) {
     console.error('Error creating plan:', error.response ? error.response.data : error.message);
     throw new Error('Failed to create plan');
@@ -138,54 +156,155 @@ async function createPlan(productId) {
 }
 
 
-app.get('/ungated.html', async (req, res) => {
+
+
+
+
+
+async function initializeProducts() {
   try {
-    const productId = await createProduct();
-    const planId = await createPlan(productId);
-    res.sendFile(path.join(__dirname, 'public', 'ungated.html'), { planId }); // Enviar planId junto con el archivo
+    const ungatedProductId = await createProduct("Ungated", "Un servicio de listas");
+    const mixtaProductId = await createProduct("Mixta", "Un servicio de listas Mixta");
+    const exclusiveProductId = await createProduct("Exclusive", "Un servicio de listas Exclusive");
+    
+    // Crear los planes correspondientes y almacenar sus IDs
+    const ungatedPlan = await createPlan(ungatedProductId, "Ungated Plan", "Plan de suscripción para Ungated", "50.00", "75.00");
+    const mixtaPlan = await createPlan(mixtaProductId, "Mixta Plan", "Plan de suscripción para Mixta", "75.00", "100.00");
+    const exclusivePlan = await createPlan(exclusiveProductId, "Exclusive Plan", "Plan de suscripción para Exclusive", "100.00", "120.00");
+    
+    console.log('All products and plans created successfully');
+    
+    // Almacenar los IDs de los planes
+    planIds = { ungatedPlan, mixtaPlan, exclusivePlan };
+    
+    return { ungatedProductId, mixtaProductId, exclusiveProductId };
   } catch (error) {
-    res.status(500).send('Error obteniendo el ID del plan');
+    console.error('Error initializing products and plans:', error);
+    throw new Error('Failed to initialize products and plans');
+  }
+}
+
+// Llamar a initializeProducts() al iniciar el servidor
+initializeProducts().catch(err => {
+  console.error("Failed to initialize products and plans on startup:", err);
+});
+
+// Manejador de la ruta '/success'
+app.get('/success', (req, res) => {
+  res.send('<h1>Gracias por tu pago</h1><p>Tu suscripción ha sido creada con éxito.</p>');
+});
+
+// Manejador de la ruta '/cancel'
+app.get('/cancel', (req, res) => {
+  res.send('<h1>Pago cancelado</h1><p>Lo sentimos, tu suscripción no ha sido completada.</p>');
+});
+
+
+
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+
+
+
+
+// Modificar la ruta /subscribe/:planId para usar createSubscription
+
+app.post('/subscribe/:planId', async (req, res) => {
+  const { planId } = req.params;
+  const { userEmail } = req.body;
+
+  try {
+    const subscriptionResponse = await createSubscription(planId, userEmail);
+    res.json(subscriptionResponse);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create PayPal subscription' });
   }
 });
 
 
-app.post('/createSubscription', async (req, res) => {
-  const { plan_id, subscriber } = req.body;
-  
+
+
+// Función para crear una suscripción
+async function createSubscription(planId, firstName, lastName, email) {
   try {
     const accessToken = await getAccessToken();
+
     const subscriptionData = {
-      plan_id: plan_id,
-      subscriber: subscriber,
+      plan_id: planId,
+      subscriber: {
+        email_address: email,
+        name: {
+          given_name: firstName,
+          surname: lastName
+        }
+      },
       application_context: {
-        brand_name: "Ungated",
-        locale: "en-US",
-        user_action: "SUBSCRIBE_NOW",
+        brand_name: 'OA Snipers',
+        locale: 'en-US',
+        shipping_preference: 'NO_SHIPPING',
+        user_action: 'SUBSCRIBE_NOW',
         payment_method: {
-          payer_selected: "PAYPAL",
-          payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED"
+          payer_selected: 'PAYPAL',
+          payee_preferred: 'IMMEDIATE_PAYMENT_REQUIRED'
         },
-        return_url: "http://localhost:3000/success", // Cambia esto a tu URL de éxito
-        cancel_url: "http://localhost:3000/cancel"   // Cambia esto a tu URL de cancelación
+        return_url: 'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cancel'
       }
     };
 
-    const response = await axios.post('https://api.sandbox.paypal.com/v1/billing/subscriptions', subscriptionData, {
+    const response = await axios.post('https://api-m.sandbox.paypal.com/v1/billing/subscriptions', subscriptionData, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-        'PayPal-Request-Id': `request-${Math.random()}`,
-      },
+        'Authorization': `Bearer ${accessToken}`
+      }
     });
 
-    const redirect_url = response.data.links.find(link => link.rel === 'approve').href;
-    res.status(200).json({ redirect_url }); // Devolver la URL de redirección a PayPal al cliente
+    return response.data;
   } catch (error) {
     console.error('Error creating subscription:', error.response ? error.response.data : error.message);
-    res.status(500).send('Error creating subscription');
+    throw new Error('Failed to create subscription');
+  }
+}
+
+
+
+// Ruta para manejar la suscripción del plan Mixta
+app.post('/subscribe-mixta', async (req, res) => {
+  const { firstName, lastName, email } = req.body;
+
+  try {
+    const subscriptionResponse = await createSubscription(mixtaPlanId, firstName, lastName, email);
+    res.json({ approvalUrl: subscriptionResponse.links.find(link => link.rel === 'approve').href });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create PayPal subscription' });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+
+app.post('/subscribe-ungated', async (req, res) => {
+  const { firstName, lastName, email } = req.body;
+
+  try {
+    const subscriptionResponse = await createSubscription(ungatedPlanId, firstName, lastName, email);
+    res.json({ approvalUrl: subscriptionResponse.links.find(link => link.rel === 'approve').href });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create PayPal subscription' });
+  }
+});
+
+
+
+// Ruta para manejar la suscripción del plan Mixta
+app.post('/subscribe-exclusive', async (req, res) => {
+  const { firstName, lastName, email } = req.body;
+
+  try {
+    const subscriptionResponse = await createSubscription(exclusivePlanId, firstName, lastName, email);
+    res.json({ approvalUrl: subscriptionResponse.links.find(link => link.rel === 'approve').href });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create PayPal subscription' });
+  }
 });
