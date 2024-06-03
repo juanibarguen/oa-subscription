@@ -438,10 +438,6 @@
 
   @media screen and (max-width: 444px){
 
-    .logo-img-letras {
-        display: none;
-    }
-
     .container-aprende p {
         font-size: 22px;
     }
