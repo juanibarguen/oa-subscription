@@ -2,6 +2,11 @@ const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { Resend } = require('resend');
+
+
+
+const resend = new Resend('re_3S86KnDU_2KHg2hdrvCENc1vLti78s6Mr');
 
 const CLIENT_ID = 'ASZO_fqJMSFWWCIvpfDeB2EEbumdOMRlDX4uQIZRDtVufx1yt3xxRzNjJ7pGrMf3lfdCaJM0kIVXCBJX';
 const CLIENT_SECRET = 'EK_Hsx5hHQPYf0Udb6POgmvLp86P_G9FCqbpRnJtoriCGr13pp4Vem98jjekQ2pQ4Uj7c99wksyoEhK2';
@@ -156,11 +161,6 @@ async function createPlan(productId, name, description, price1, price2) {
 }
 
 
-
-
-
-
-
 async function initializeProducts() {
   try {
     const ungatedProductId = await createProduct("Ungated", "Un servicio de listas");
@@ -190,28 +190,47 @@ initializeProducts().catch(err => {
 });
 
 // Manejador de la ruta '/success'
+let nombreForm;
+let apellidoForm;
+let emailForm;
+
+
 app.get('/success', (req, res) => {
+
+  const { subscription_id, ba_token, token } = req.query;
+
+  if (!subscription_id) {
+    return res.status(400).send('Subscription ID not provided');
+  }
+
+  // Aquí puedes realizar cualquier lógica adicional, como verificar el estado de la suscripción
+  //console.log('Subscription ID:', subscription_id);
+  //console.log('BA Token:', ba_token);
+  //console.log('Token:', token);
+  //console.log("ME LA RE BANCOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+  console.log(nombreForm);
+  console.log(apellidoForm);
+  console.log(emailForm);
+
+
+resend.emails.send({
+    from: 'oasnipers@resend.dev',
+    to: emailForm,
+    subject: 'Bienvenido a OA Snipers',
+    html: `Hola ${nombreForm} bienvenido a la lista, tu pago se registro con exito`
+  });
+
+  // Respondemos con un mensaje de éxito
   res.send('<h1>Gracias por tu pago</h1><p>Tu suscripción ha sido creada con éxito.</p>');
 });
+
 
 // Manejador de la ruta '/cancel'
 app.get('/cancel', (req, res) => {
   res.send('<h1>Pago cancelado</h1><p>Lo sentimos, tu suscripción no ha sido completada.</p>');
 });
 
-
-
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
-
-
-
-
 // Modificar la ruta /subscribe/:planId para usar createSubscription
-
 app.post('/subscribe/:planId', async (req, res) => {
   const { planId } = req.params;
   const { userEmail } = req.body;
@@ -223,8 +242,6 @@ app.post('/subscribe/:planId', async (req, res) => {
     res.status(500).json({ error: 'Failed to create PayPal subscription' });
   }
 });
-
-
 
 
 // Función para crear una suscripción
@@ -262,14 +279,15 @@ async function createSubscription(planId, firstName, lastName, email) {
       }
     });
 
+    nombreForm = firstName
+    apellidoForm = lastName
+    emailForm = email
     return response.data;
   } catch (error) {
     console.error('Error creating subscription:', error.response ? error.response.data : error.message);
     throw new Error('Failed to create subscription');
   }
 }
-
-
 
 // Ruta para manejar la suscripción del plan Mixta
 app.post('/subscribe-mixta', async (req, res) => {
@@ -283,6 +301,7 @@ app.post('/subscribe-mixta', async (req, res) => {
   }
 });
 
+// Ruta para manejar la suscripción del plan Ungated
 
 app.post('/subscribe-ungated', async (req, res) => {
   const { firstName, lastName, email } = req.body;
@@ -295,9 +314,7 @@ app.post('/subscribe-ungated', async (req, res) => {
   }
 });
 
-
-
-// Ruta para manejar la suscripción del plan Mixta
+// Ruta para manejar la suscripción del plan Exclusive
 app.post('/subscribe-exclusive', async (req, res) => {
   const { firstName, lastName, email } = req.body;
 
@@ -308,3 +325,28 @@ app.post('/subscribe-exclusive', async (req, res) => {
     res.status(500).json({ error: 'Failed to create PayPal subscription' });
   }
 });
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+
+
+
+
+ // resend.emails.send({
+  //  from: 'oasnipers@resend.dev',
+  //  to: 'juanibarguen159@gmail.com',
+  //  subject: 'Hello World',
+  //  html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+  //});
+
+  app.post('/submit-form', (req, res) => {
+    const { firstName, lastName, email } = req.body;
+    
+    // Guardar los datos del formulario en la sesión
+    req.session.formData = { firstName, lastName, email };
+  
+    // Redirigir al usuario a la página de éxito
+    res.redirect('/success');
+  });
