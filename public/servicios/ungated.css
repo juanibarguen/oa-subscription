@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.data-sub {
+    display: flex;
+    justify-content: center;
+    padding: 120px 25px 0;
+}
+
+.card {
+    width: 500px;
+    border: 1px solid black
+}
+
+.form-sub {
+    width: 500px;
+    border: 1px solid red;
+    padding: 10px;
+}
+
+form input {
+    width: 98%;
+    height: 50px;
+}
+
+form button {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #2C2E2F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+.inputcheckbox {
+    width: 12px;
+    height: 12px;
+}
+.casilla {
+    padding: 20px 0 ;
+    font-size: 15px;
+}
+.card-under-descargo {
+    padding: 12px;
+}
+
+.card-under-descargo p {
+    font-size: 15px;
+}
+
+.box-input {
+    padding: 9px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card-top {
+    padding: 10px;
+    row-gap: 10px;
+    background: #F7F8FC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.card-under {
+    background-color: #fff;
+}
+
+.card-under ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    padding: 15px 25px;
+    align-items: center ;
+}
+
+.card-under ul li {
+    font-size: 16px;
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    text-align: center;
+}
+
+.card-under ul li svg {
+    height: 12px;
+}
+
+.card-under-cta {
+    /* padding: 10px; */
+    border-radius: 10px;
+    width: 60%;
+    text-align: center;
+    background: #10182F
+}
+
+.card-under-cta a {
+    text-decoration: none;
+    color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+}
+
+.card-top-img span {
+    font-size: 70px;
+}   
