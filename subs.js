@@ -267,8 +267,10 @@ async function createSubscription(planId, firstName, lastName, email) {
           payer_selected: 'PAYPAL',
           payee_preferred: 'IMMEDIATE_PAYMENT_REQUIRED'
         },
-        return_url: 'https://oa-subscription.onrender.com/success',
-        cancel_url: 'https://oa-subscription.onrender.com/cancel'
+        return_url: 'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cancel'
+        //,return_url: 'https://oa-subscription.onrender.com/success',
+        //cancel_url: 'https://oa-subscription.onrender.com/cancel'
       }
     };
 
