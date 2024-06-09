@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,87 +15,92 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="./assets/oa-snipers.ico" type="image/x-icon">
 </head>
-
 <body>
-
     <header class="hero">
-
         <nav class="nav container" id="nav">
             <a href="index.html" class="logo">
                 <img class="logo-img" src="./assets/logo-sin-letras.png" alt="">
                 <img class="logo-img-letras" src="./assets/logo-letras.png" alt="">
             </a>
-
             <ul class="nav__links" id="navLinks">
-
-                <li class="nav__item">
-                    <a href="index.html" class="nav__link">Inicio</a>
-                </li>
-                <li class="nav__item">
-                    <a href="servicios.html" class="nav__link">Servicios</a>
-                </li>
-                <li class="nav__item">
-                    <a href="cursos.html" class="nav__link">Cursos</a>
-                </li>
-                <li class="nav__item">
-                    <a href="blog.html" class="nav__link">Blog</a>
-                </li>
-                <li class="nav__item">
-                    <a href="contacto.html" class="nav__link">Contacto</a>
-                </li>
-
-                <div class="info" id="info">
-                    <p>OA Snipers | ©2024 | All rights reserved </p>
-                </div>
-
+                <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
+                <li class="nav__item"><a href="servicios.html" class="nav__link">Servicios</a></li>
+                <li class="nav__item"><a href="cursos.html" class="nav__link">Cursos</a></li>
+                <li class="nav__item"><a href="blog.html" class="nav__link">Blog</a></li>
+                <li class="nav__item"><a href="contacto.html" class="nav__link">Contacto</a></li>
+                <div class="info" id="info"><p>OA Snipers | ©2024 | All rights reserved </p></div>
             </ul>
-
             <a href="#nav" class="nav__hamburguer" id="menu-responsive">
                 <img src="./assets/bars-solid.svg" class="nav__icon nav__icon-menu">
             </a>
-
             <a href="#" class="nav__close" id="menu-responsive-closed">
                 <img src="./assets/close.svg" class="nav__icon">
             </a>
-
         </nav>
-        
     </header>
-
     <h2 class="title">Contactanos!</h2>
     <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, neque?</p>
 
-    <section class="container-contacto">
 
+    <section class="container-contacto">
         <div class="content-contacto">
             <img src="./assets/contact/sent-messages-isometric.svg" alt="">
         </div>
-    
         <div class="form-contacto">
-            
-            <form>
+            <form id="contactForm">
                 <div class="form-group">
-                  <label for="name">Nombre:</label>
-                  <input type="text" class="form-control" id="name" name="name" required >
+                    <label for="name">Nombre:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-               
                 <div class="form-group">
                     <label for="email">Correo electrónico:</label>
-                    <input type="email" class="form-control" id="email" name="email" required >
-                  </div>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
                 <div class="form-group">
-                  <label for="message">Mensaje:</label>
-                  <textarea class="form-control" id="message" name="message" required></textarea>
+                    <label for="message">Mensaje:</label>
+                    <textarea class="form-control" id="message" name="message" required></textarea>
                 </div>
                 <button type="submit" class="btn">Enviar</button>
-              </form>
+            </form>
         </div>
-        
     </section>
 
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evita el envío del formulario por defecto
 
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Manejar la respuesta exitosa
+                    alert('Mensaje enviado exitosamente');
+                } else {
+                    // Manejar errores
+                    alert('Error al enviar el mensaje');
+                }
+            } catch (error) {
+                // Manejar errores de red u otros
+                alert('Error de red');
+            }
+        });
+    </script>
+
+
+
+    <script src="./menu-responsive.js"></script>
 </body>
-
-
-<script src="./menu-responsive.js"></script>
 </html>

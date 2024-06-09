@@ -1,10 +1,12 @@
 
-
+body {
+    background-color: #EFECE9;
+}
 
 .container-contacto {
     width: 100%;
     padding:30px 100px 50px 100px;
-    /* border: 1px solid black; */
+    flex-direction: row-reverse;
     display: flex;
 }
 

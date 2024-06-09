@@ -1,11 +1,11 @@
+body {
+    background-color: #FFF3EC;
 
-
-
-
+}
 .seccion {
     padding-top: 100px;
 }
-/* box */
+/* box #FFF7F2    https://www.behance.net/gallery/191826555/Digital-agengy-Landing-page-Website?tracking_source=search_projects|web+design+orange&l=5*/
 .titulo-principal {
     font-size: 65px;
     padding: 10px 0 20px;
@@ -21,12 +21,15 @@
     font-size: 35px;
     font-weight: 600;
 }
-
+.contenido h1,p {
+    color: #293343;
+}
 .contenido  {
     color:#293343;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #fff;
 }
 
 .contenido button {
@@ -103,47 +106,57 @@
 /* asdasdasdasdasdddddddddddddddddddddddd */
 
 
-.container-acerca-de-nosotros {
-    color:#293343;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.container-acerca-de-nosotros h2 {
-    padding: 1em;
-}
-
-.acerca-de-nosotros {
-    display: flex;
-    column-gap: 1em;
-    padding: 1em;
-    /* border: 1px solid black; */
+.container-acerca-de-nosotros h2{
+    text-align: center;
+    padding: 60px 0 40px;
 }
 
 .acerca-de-nosotros {
     max-width: 1200px;
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    display: flex; /* Cambiar a flex */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan si no caben en una fila */
+    justify-content: space-between; /* Distribuir el espacio entre los elementos */
+    padding: 0 20px; /* Agregar relleno a los lados */
 }
 
-.acerca-de-nosotros-card {
-    text-align: center;
-    padding: 1em;
-    border: 1px solid black;
+.card-prueba {
+    background-color: #fff;
+    width: calc(33.33% - 20px); /* Aproximadamente un tercio del contenedor menos el espacio entre tarjetas */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box; /* Incluir el relleno en el ancho */
 }
 
-.acerca-de-nosotros-card h3 {
-    padding-bottom: 1em;
+.card-prueba-title {
+    display: flex;
+    align-items: center;
+    padding: 0 30px 10px;
 }
 
-.acerca-de-nosotros-card p {
-    font-size: 12px;
+.card-prueba-title img {
+    width: 80px;
+    margin-right: 10px;
 }
+
+.card-prueba-textos {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 0 35px; /* Ajustar el relleno */
+}
+
+.card-prueba-texto {
+    display: flex;
+}
+
 /* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
 
 
 
 .container-que-ofrecemos {
-    color:#293343;
+    color:#fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -162,9 +175,8 @@
 .que-ofrecemos-card {
     text-align: center;
     padding: 1em;
-    border: 1px solid black;
     display: flex;
-    /*height: 300px;*/
+    box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
 }
 
 .que-ofrecemos-card img {
@@ -172,6 +184,7 @@
 }
 
 .que-ofrecemos-text {
+    color: #293343;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,12 +217,16 @@
     color: #293343;
 }
 
+.index-newsletter-text p {
+    color: #fff;
+}
+
 .index-newsletter {
-    color: #293343;
+    color: #fff;
+    background-color: #102247;
     max-height: 235px;
     display: flex;
     max-width: 1200px;
-    border: 1px solid black;
     padding: 1em;
 }
 
@@ -241,11 +258,18 @@
 
 .index-newsletter-cta input {
     height: 40px;
+    border-radius: 10px 0 0 10px;
+    border: none;
 }
 
 .index-newsletter-cta button {
+    cursor: pointer;
     height: 40px;
     padding: 10px 20px;
+    background-color: #FF7547;
+    color:#ffffff;
+    border: none;
+    border-radius: 0 10px 10px 0;
 }
 
 
@@ -257,13 +281,13 @@
     margin: 0 auto;
     display: flex;
     padding: 0 20px; /* Ajusta el valor según lo necesites */
+    gap: 20px;
     box-sizing: border-box; /* Para incluir el padding en el ancho total del contenedor */
   }
 
 .container-aprende p {
     text-align: center;
-    padding: 0 35px;
-    font-size: 35px;
+    padding: 20px 35px 30px;
 }
   
   .contenedor img {
@@ -352,11 +376,22 @@
     }
   }
 
-
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 870px) {
     .contenedor {
         flex-direction: column;
     }
+    .card-prueba {
+        width: 100%;
+        margin-bottom: 10px
+    }
+    .card-prueba-title {    
+        padding: 0 30px 10px;
+    }
+ }
+
+
+  @media screen and (max-width: 600px) {
+
     .contenedor img {
         width: 100%;
     }
@@ -382,9 +417,6 @@
         text-align: center;
     }
 
-    .container-acerca-de-nosotros h2 {
-        padding: 1em 1em 0;
-    }
 
     .acerca-de-nosotros {
         flex-direction: column;
@@ -470,3 +502,20 @@
   .right {
     padding-left: 2px;
   }
+
+
+
+
+
+
+
+
+  .tititle {
+    color: #293343;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.que-ofrecemos-title{
+    padding-bottom: 30px;
+}

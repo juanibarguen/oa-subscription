@@ -70,7 +70,7 @@
           <p class="subtitulo-principal">Arbitraje en linea</p>
           <p class="parrafo-principal">Para suerte de los vendedores estamos nosotros!</p>
           <div class="boton-principal">
-            <button>Botón</button>
+            <button href="wrapper">Botón</button>
           </div>
         </div>
         <div class="imagen">
@@ -79,31 +79,66 @@
       </section>
 
     <section class="container-acerca-de-nosotros">
-        <h2>Acerca de OA Snipers</h2>
+        <h2 class="tititle">Acerca de OA Snipers</h2>
         <div class="acerca-de-nosotros">
-            <div class="acerca-de-nosotros-card">
-                <img src="./assets/inicio/crecimiento.svg" alt="">
-                <h3>CRECIMIENTO</h3>
-                <p>Ahorre su valioso tiempo y elimine el estrés. Te ayudamos a evitar uno de los mayores desafíos que enfrentan los vendedores de Amazon FBA</p>
+
+
+            <div class="card-prueba">
+                <div class="card-prueba-title">
+                    <img src="./assets/inicio/prueba.svg" alt="">
+                    <h3>Crecimiento</h3>
+                </div>
+                <div class="card-prueba-textos">
+                    <div class="card-prueba-texto">
+                        <p>1-</p>
+                        <p>Ahorre su valioso tiempo y elimine el estrés.</p>
+                    </div>
+                    <div class="card-prueba-texto">
+                        <p>2-</p>
+                        <p>Te ayudamos a evitar uno de los mayores desafíos que enfrentan los vendedores de Amazon FBA</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="acerca-de-nosotros-card">
-                <img src="./assets/inicio/crecimiento.svg" alt="">
-                <h3>DIARIO</h3>
-                <p>Nuestra lista se enviará de lunes a viernes por la mañana. Ofrecemos un flujo constante de productos que le permitirás crear su inventario rápidamente</p>
-            </div>
-
-            <div class="acerca-de-nosotros-card">
-                <img src="./assets/inicio/crecimiento.svg" alt="">
-                <h3>DE CALIDAD</h3>
-                <p>Analizamos productos considerando ventas, ROI, ganancias, competencia y clasificación para ofrecerte solo los mejores. Tu éxito es nuestra prioridad.</p>
+            <div class="card-prueba">
+                <div class="card-prueba-title">
+                    <img src="./assets/inicio/prueba.svg" alt="">
+                    <h3>Diario</h3>
+                </div>
+                <div class="card-prueba-textos">
+                    <div class="card-prueba-texto">
+                        <p>1-</p>
+                        <p>Nuestra lista se enviará de lunes a viernes por la mañana.</p>
+                    </div>
+                    <div class="card-prueba-texto">
+                        <p>2-</p>
+                        <p>Ofrecemos un flujo constante de productos </p>
+                    </div>
+                </div>
             </div>
             
+            <div class="card-prueba">
+                <div class="card-prueba-title">
+                    <img src="./assets/inicio/prueba.svg" alt="">
+                    <h3>De calidad</h3>
+                </div>
+                <div class="card-prueba-textos">
+                    <div class="card-prueba-texto">
+                        <p>1-</p>
+                        <p>Analizamos productos considerando ventas, ROI, ganancias y competencia</p>
+                    </div>
+                    <div class="card-prueba-texto">
+                        <p>2-</p>
+                        <p>Tu éxito es nuestra prioridad.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <section class="container-que-ofrecemos">
-        <h2>Que ofrecemos?</h2>
+        <h2 class="que-ofrecemos-title tititle">Que ofrecemos?</h2>
         <div class="que-ofrecemos">
             <div class="que-ofrecemos-card card-one">
                 <img src="./assets/inicio/crecimiento.svg" alt="">
@@ -129,9 +164,11 @@
             <div class="index-newsletter-text">
                 <h4>¿Querés recibir aviso de nuevos cursos, blogs y promociones en nuestras listas?</h4>
                 <p>Suscribite!</p>
-                <div class="index-newsletter-cta">
-                    <input type="email" name="" id=""><button type="submit">Enviar</button>
-                </div>
+                <form id="newsletterForm">
+                    <div class="index-newsletter-cta">
+                        <input type="email" name="email" id="email" placeholder="Tu correo electrónico" required><button type="submit">Enviar</button>
+                    </div>
+                </form>
             </div>
             <div class="index-newsletter-img">
                 <img src="./assets/inicio/Amazon-PPC-ads.jpg" alt="">
@@ -139,12 +176,30 @@
         </div>
     </section>
 
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+        
+            const response = await fetch('/subscribe-newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+        
+            const result = await response.json();
+            alert(result.message);
+        });
+        </script>
 
-    <p class="title-testimonios">Testimonios de clientes que confian en OA Snipers!</p>
+
+    <p class="title-testimonios tititle">Testimonios de clientes que confian en OA Snipers!</p>
     
     <section class="containerr">
         <div class="wrapper" id="wrapper">
-            <i class="left"><img src="./assets/inicio/chevron_left.svg" alt=""></i>
+            <i class="left" id="left"><img src="./assets/inicio/chevron_left.svg" alt=""></i>
             <ul class="carousel">
 
               <li class="card">
@@ -196,21 +251,21 @@
               </li>
 
             </ul>
-            <i class="right"><img src="./assets/inicio/chevron_right.svg" alt=""></i>
+            <i class="right" id="right"><img src="./assets/inicio/chevron_right.svg" alt=""></i>
           </div>
     </section>
 
     <section class="container-aprende">
-        <p>Aprende con nosotros</p>
+        <p class="tititle">Aprende con nosotros</p>
         <div class="contenedor">
-            <img src="./assets/inicio/Amazon-PPC-ads.jpg" alt="Imagen 1">
-            <img src="./assets/inicio/Amazon-PPC-ads.jpg" alt="Imagen 2">
-          </div>    
+            <iframe width="" height="300" src="https://www.youtube.com/embed/pNULyf0GGFY?si=2SFycUDBdd1Om2Zn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="100%" height="300" src="https://www.youtube.com/embed/Z3a4e1_FW6g?si=jmjL_JrfT59ca9Pb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>    
     </section>
 
 
     <section class="faq-section">
-        <p class="title-faq">Preguntas frecuentes</p>
+        <p class="title-faq tititle">Preguntas frecuentes</p>
         <div class="faq-container">
 
           <div class="pregunta">
@@ -237,9 +292,6 @@
           
         </div>
     </section>
-
-
-
 
 
 

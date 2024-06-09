@@ -86,14 +86,14 @@
   height: 420px;
   list-style: none;
   background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   cursor: pointer;
   padding-bottom: 15px;
   flex-direction: column;
   border-radius: 8px;
-  border: 1px solid;
 }
 .carousel .card .img {
-  background: #818181;
+  background: #EB8323;
   height: 148px;
   width: 148px;
   border-radius: 50%;

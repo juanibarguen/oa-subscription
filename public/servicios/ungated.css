@@ -3,7 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+body {
+    background-color: #130A38;
+}
 .data-sub {
     display: flex;
     justify-content: center;
@@ -12,13 +14,15 @@
 
 .card {
     width: 500px;
-    border: 1px solid black
+    border: 1px solid black;
+    background-color: #1A0E4B;
 }
 
 .form-sub {
     width: 500px;
-    border: 1px solid red;
     padding: 10px;
+    color: #fff;
+    background-color: #1A0E4B;
 }
 
 form input {
@@ -86,9 +90,10 @@ form button {
 
 
 .card-top {
+    color: #fff;
     padding: 10px;
     row-gap: 10px;
-    background: #F7F8FC;
+    background: #1A0E4B;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,7 +101,8 @@ form button {
 }
 
 .card-under {
-    background-color: #fff;
+    color: #fff;
+    background-color: #1A0E4B;
 }
 
 .card-under ul {
@@ -118,6 +124,7 @@ form button {
 
 .card-under ul li svg {
     height: 12px;
+    fill: #fff;
 }
 
 .card-under-cta {

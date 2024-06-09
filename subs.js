@@ -335,14 +335,6 @@ app.listen(PORT, () => {
 
 
 
-
- // resend.emails.send({
-  //  from: 'oasnipers@resend.dev',
-  //  to: 'juanibarguen159@gmail.com',
-  //  subject: 'Hello World',
-  //  html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
-  //});
-
   app.post('/submit-form', (req, res) => {
     const { firstName, lastName, email } = req.body;
     
@@ -352,3 +344,48 @@ app.listen(PORT, () => {
     // Redirigir al usuario a la página de éxito
     res.redirect('/success');
   });
+
+
+
+
+
+// Ruta para enviar correo de contacto utilizando Resend
+app.post('/send-email', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  try {
+    await resend.emails.send({
+      from: 'oasnipers@resend.dev',
+      to: email, // Usar la dirección de correo proporcionada en el parámetro
+      subject: 'Nuevo mensaje de CONTACTO',
+      html: `<p>Nombre: ${name}</p><p>Correo electrónico: ${email}</p><p>Mensaje: ${message}</p>`
+    });
+    res.status(200).json({ message: 'Email enviado exitosamente' });
+    console.log("nombre: " + name + " correo: " + email + " mensaje: " + message);
+  } catch (error) {
+    console.error('Error enviando email:', error.message);
+    res.status(500).json({ message: 'Error al enviar el email', error: error.message });
+  }
+});
+
+
+
+
+// Ruta para suscribirse a la newsletter utilizando Resend
+app.post('/subscribe-newsletter', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    await resend.emails.send({
+      from: 'oasnipers@resend.dev',
+      to: email, // Enviar al correo electrónico ingresado
+      subject: 'Suscripción a la Newsletter',
+      html: `<p>Hola,</p><p>Gracias por suscribirte a nuestra newsletter. Ahora recibirás anuncios, novedades de blog y cursos directamente en tu correo.</p><p>Saludos,<br>El equipo de OA Snipers</p>`
+    });
+    res.status(200).json({ message: 'Te has suscrito exitosamente. Revisa tu correo para más detalles.' });
+    console.log("Nuevo suscriptor: " + email);
+  } catch (error) {
+    console.error('Error enviando email:', error.message);
+    res.status(500).json({ message: 'Error al suscribirse. Por favor, intenta nuevamente.', error: error.message });
+  }
+});

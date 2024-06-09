@@ -29,8 +29,7 @@
     --state-close: scale(0);
     --state-hamburguer:scale(1);
     --state-menu: translate(-100%);
-    background-color: #fff;
-    /* background-color: #F4F5F5; */
+    background-color: #FFF3EC;
     width: 100%;
     padding: 7px 20px;
     display: grid;
@@ -107,7 +106,7 @@
 }
 
 .nav__link{
-    color: #929395;
+    color: #34465E;
     text-decoration: none;
     font-size: 1.2rem;
     /* letter-spacing: 1px; */
