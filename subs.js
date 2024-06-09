@@ -389,3 +389,25 @@ app.post('/subscribe-newsletter', async (req, res) => {
     res.status(500).json({ message: 'Error al suscribirse. Por favor, intenta nuevamente.', error: error.message });
   }
 });
+
+
+// SUSCRIPCION A SEMANA GRATUITA
+app.post('/subscribe-week-free', async (req, res) => {
+  const { name, email, list } = req.body;
+
+  try {
+    await resend.emails.send({
+      from: 'oasnipers@resend.dev',
+      to: 'juanibarguen159@gmail.com',
+      subject: 'Suscripción a semana gratuita',
+      html: `<p>Nueva subscripcion gratiuda de: ${name}</p>
+             <p>Lista seleccionada: ${list}.</p>
+             <p>Correo a registrar: ${email}</p>`
+    });
+    res.status(200).json({ message: 'Te has suscrito exitosamente. Revisa tu correo para más detalles.' });
+    console.log(`Nuevo suscriptor: ${name}, ${email}, ${list}`);
+  } catch (error) {
+    console.error('Error enviando email:', error.message);
+    res.status(500).json({ message: 'Error al suscribirse. Por favor, intenta nuevamente.', error: error.message });
+  }
+});

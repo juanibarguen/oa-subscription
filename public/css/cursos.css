@@ -7,12 +7,13 @@ section {
     justify-content: center;
     row-gap: 1em;
     padding: 50px;
+    background-color: #FFF3EC;
 }
 
 h2 {
     text-align: center;
     font-size: 25px;
-    font-weight: 300;
+    font-weight: bold;
 }
 
 .img-constructions {

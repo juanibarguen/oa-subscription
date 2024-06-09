@@ -2,15 +2,15 @@
 .week-free {
     padding: 0 200px 50px;
     display: flex;
-    background-color: #1A0E4B;
+    background-color: #f8e2d5;
 }
 .form-week-free {
     width: 50%;
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background-color:#2d2f69;
-    color: #f1f1f1;
+    background-color:#FFF3EC;
+    color: #2d2f69;
     border-radius: 10px 0 0 10px;
 }
 
@@ -28,7 +28,9 @@
     width: 50%;
     display: flex;
     border-radius: 0 10px 10px 0;
+    background-color:#FFF3EC;
     justify-content: center;
+
 }
 
 .image-week-free img {
@@ -48,8 +50,8 @@
     padding: 50px 200px 100px;
     display: flex;
     flex-direction: column;
-    background-color: #130A38;
-    color: #f1f1f1;
+    background-color: #FFF3EC;
+    color: #2A2A2A;
 }
 
 .text-servicios {
@@ -58,13 +60,15 @@
 }
 
 .text-servicios h2 {
-    font-size: 25px;
-    font-weight: 300;
+    font-size: 30px;
+    font-weight: bold;
+    color: #293343;
 }
 
 .text-servicios p {
     padding: 25px 0;
     font-weight: 300;
+    color: #293343;
 }
 
 .select-plan p {
@@ -80,6 +84,10 @@
     font-size: 20px;
 }
 
+.card {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
 .card-top {
     padding: 10px;
@@ -138,13 +146,13 @@
 .title-card {
     font-size: 18px;
     font-weight: 800;
-    color: #f1f1f1;
+    color: #293343
 }
 
 .price-card {
     font-weight: 900;
     font-size: 30px;
-    color: #f1f1f1;
+    color: #293343
 }
 
 .card-under-cta a p {
@@ -166,8 +174,8 @@
 
 .text-personalizada {
     padding: 30px 200px;
-    background-color: #1A0E4B;
-    color: #f1f1f1;
+    background-color: #f8e2d5;
+    color: #2A2A2A;
 }
 
 .form-group input {
@@ -272,11 +280,11 @@
 
 
 .card-top {
-    background: #1A0E4B;
+    background: #fff;
 }
 
 .card-under {   
-    background-color: #1A0E4B;
+    background-color: #fff;
     border-radius: 0 0 15px 15px;
 }
 .card-under-cta a {
@@ -301,14 +309,8 @@
     border-radius: 10px;
 }
 
-.image-week-free {
-    background-color: #2d2f69;
-}
-
-#nav {
-    background-color: #130A38;
-}
-
-.nav__link {
-    color: #f1f1f1;
+.container-wf {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 15px;
 }

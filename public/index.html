@@ -180,17 +180,27 @@
         document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
-        
-            const response = await fetch('/subscribe-newsletter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email })
-            });
-        
-            const result = await response.json();
-            alert(result.message);
+            
+            try {
+                const response = await fetch('/subscribe-newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(result.message);
+                    e.target.reset(); // Vaciar los campos del formulario
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('Error de red');
+            }
         });
         </script>
 
