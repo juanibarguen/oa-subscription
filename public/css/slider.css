@@ -57,6 +57,7 @@
   border-radius: 8px;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  padding: 2px;
 }
 .carousel::-webkit-scrollbar {
   display: none;
