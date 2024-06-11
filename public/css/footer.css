@@ -80,7 +80,7 @@
 }
 
 .content-footer-sub p {
-    color: #e1e1e1;
+    color: #fff;
     padding-bottom: 15px;
 }
 
@@ -88,25 +88,39 @@
     height: 50px;
     width: 220px;
     padding: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
 }
 
 .sub-entrada button {
     padding: 5px 20px;
     cursor: pointer;
+    background-color: #FF7547;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
 }
 
+.sub-entrada button:hover {
+    background-color: #cc6441;
+}
 
 
 .svg-ig {
     width: 30px;
+    fill: #cfcfcf;
 }
 
 .svg-fb {
     width: 30px;
+    fill: #cfcfcf;
 }
 
 .svg-yt {
     width: 35px;
+    fill: #cfcfcf;
 }
 
 #selected {
