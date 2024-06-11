@@ -1,6 +1,6 @@
 body {
     background-color: #FFF3EC;
-
+    scroll-behavior: smooth;
 }
 .seccion {
     padding-top: 100px;
