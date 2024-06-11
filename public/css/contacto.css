@@ -74,12 +74,18 @@ body {
     max-height: 150px;
     width: 100%;
     resize: none;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .form-contacto form button {
     margin: 30px 0;
     width: 100%;
     height: 50px;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    border-radius: 7px;
 }
 
 

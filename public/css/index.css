@@ -7,18 +7,18 @@ body {
 }
 /* box #FFF7F2    https://www.behance.net/gallery/191826555/Digital-agengy-Landing-page-Website?tracking_source=search_projects|web+design+orange&l=5*/
 .titulo-principal {
-    font-size: 65px;
+    font-size: 40px;
     padding: 10px 0 20px;
-    font-weight: 900;
+    font-weight: normal;
 }
 
 .subtitulo-principal {
-    font-size: 45px;
+    font-size: 16px;
     font-weight: 200;
 }
 
 .parrafo-principal {
-    font-size: 35px;
+    font-size: 15px;
     font-weight: 600;
 }
 .contenido h1,p {
@@ -32,9 +32,17 @@ body {
     color: #fff;
 }
 
-.contenido button {
-    padding: 20px 40px;
-}
+.contenido a {
+        padding: 20px 40px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border: none;
+        cursor: pointer;
+    }
+    .contenido a:hover {
+        background-color: #FF7547;
+    }
 
 
 .seccion {
@@ -177,6 +185,7 @@ body {
     padding: 1em;
     display: flex;
     box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+    background-color: #fff;
 }
 
 .que-ofrecemos-card img {

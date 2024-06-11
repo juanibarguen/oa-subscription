@@ -4,25 +4,26 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #130A38;
+    background-color: #FFF3EC;
 }
 .data-sub {
     display: flex;
     justify-content: center;
     padding: 120px 25px 0;
+    background-color: #FFF3EC;
 }
 
 .card {
-    width: 500px;
-    border: 1px solid black;
-    background-color: #1A0E4B;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 15px;
 }
 
 .form-sub {
-    width: 500px;
+   max-width: 500px;
     padding: 10px;
-    color: #fff;
-    background-color: #1A0E4B;
+    color: #293343;
+    background-color: #fff;
 }
 
 form input {
@@ -67,33 +68,11 @@ form button {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .card-top {
-    color: #fff;
+    color: #293343;
     padding: 10px;
     row-gap: 10px;
-    background: #1A0E4B;
+    background: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,8 +80,8 @@ form button {
 }
 
 .card-under {
-    color: #fff;
-    background-color: #1A0E4B;
+    color: #293343;
+    background-color: #fff;
 }
 
 .card-under ul {
@@ -146,3 +125,18 @@ form button {
 .card-top-img span {
     font-size: 70px;
 }   
+
+.container-data-sub {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+@media screen and (max-width: 915px) {
+    .container-data-sub {
+        flex-direction: column;
+    }
+    .card-under-descargo {
+        text-align: center;
+    }
+}

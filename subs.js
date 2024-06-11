@@ -6,10 +6,13 @@ const { Resend } = require('resend');
 
 
 
-const resend = new Resend('re_3S86KnDU_2KHg2hdrvCENc1vLti78s6Mr');
+require('dotenv').config();
 
-const CLIENT_ID = 'ASZO_fqJMSFWWCIvpfDeB2EEbumdOMRlDX4uQIZRDtVufx1yt3xxRzNjJ7pGrMf3lfdCaJM0kIVXCBJX';
-const CLIENT_SECRET = 'EK_Hsx5hHQPYf0Udb6POgmvLp86P_G9FCqbpRnJtoriCGr13pp4Vem98jjekQ2pQ4Uj7c99wksyoEhK2';
+//CLAVE OA SNIPERS
+const resend = new Resend('re_BAY2Hwmp_7jC7TSQZUdYrDgUjGoY9kG6H');
+
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const PORT = 3000;
 
 let planIds = {};
@@ -23,7 +26,7 @@ async function getAccessToken() {
   try {
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+      url: 'https://api-m.paypal.com/v1/oauth2/token',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -52,7 +55,7 @@ async function createProduct(name, description) {
 
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.sandbox.paypal.com/v1/catalogs/products',
+      url: 'https://api-m.paypal.com/v1/catalogs/products',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -130,7 +133,7 @@ async function createPlan(productId, name, description, price1, price2) {
       
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.sandbox.paypal.com/v1/billing/plans',
+      url: 'https://api-m.paypal.com/v1/billing/plans',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -274,7 +277,7 @@ async function createSubscription(planId, firstName, lastName, email) {
       }
     };
 
-    const response = await axios.post('https://api-m.sandbox.paypal.com/v1/billing/subscriptions', subscriptionData, {
+    const response = await axios.post('https://api-m.paypal.com/v1/billing/subscriptions', subscriptionData, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
@@ -397,7 +400,7 @@ app.post('/subscribe-week-free', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'oasnipers@resend.dev',
+      from: 'onboarding@resend.dev',
       to: 'juanibarguen159@gmail.com',
       subject: 'Suscripción a semana gratuita',
       html: `<p>Nueva subscripcion gratiuda de: ${name}</p>

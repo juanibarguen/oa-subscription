@@ -80,14 +80,15 @@
   .readmore {
     display: flex;
     padding: 10px 15px;
-    background-color: #e88121;
+    background-color: #fff;
     color: #293343;
     text-decoration: none;
     font-size: 14px;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-  }
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
 
   .blog-section {
