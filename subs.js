@@ -9,7 +9,7 @@ const { Resend } = require('resend');
 require('dotenv').config();
 
 //CLAVE OA SNIPERS
-const resend = new Resend('re_BAY2Hwmp_7jC7TSQZUdYrDgUjGoY9kG6H');
+const resend = new Resend('re_fKbEXktf_AvVJubBbC7BE3bHFCWkk6x8W');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -358,8 +358,8 @@ app.post('/send-email', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'oasnipers@resend.dev',
-      to: email, // Usar la dirección de correo proporcionada en el parámetro
+      from: 'support@oasnipers.com',
+      to: 'oasnipers21@gmail.com',
       subject: 'Nuevo mensaje de CONTACTO',
       html: `<p>Nombre: ${name}</p><p>Correo electrónico: ${email}</p><p>Mensaje: ${message}</p>`
     });
@@ -380,7 +380,7 @@ app.post('/subscribe-newsletter', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'oasnipers@resend.dev',
+      from: 'info@oasnipers.com',
       to: email, // Enviar al correo electrónico ingresado
       subject: 'Suscripción a la Newsletter',
       html: `<p>Hola,</p><p>Gracias por suscribirte a nuestra newsletter. Ahora recibirás anuncios, novedades de blog y cursos directamente en tu correo.</p><p>Saludos,<br>El equipo de OA Snipers</p>`
@@ -400,8 +400,8 @@ app.post('/subscribe-week-free', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'juanibarguen159@gmail.com',
+      from: 'info@oasnipers.com',
+      to: 'oasnipers21@gmail.com',
       subject: 'Suscripción a semana gratuita',
       html: `<p>Nueva subscripcion gratiuda de: ${name}</p>
              <p>Lista seleccionada: ${list}.</p>
@@ -413,4 +413,20 @@ app.post('/subscribe-week-free', async (req, res) => {
     console.error('Error enviando email:', error.message);
     res.status(500).json({ message: 'Error al suscribirse. Por favor, intenta nuevamente.', error: error.message });
   }
+
+  try {
+    await resend.emails.send({
+      from: 'info@oasnipers.com',
+      to: email,
+      subject: 'Bienvenido a la semana gratuita',
+      html: `<p>Hola!: ${name} bienvenido a la prueba semana gratutita de la lista ${list}. Tu correo a sido cargado en nuestra base de datos con exito!</p>`
+    });
+    res.status(200).json({ message: 'Te has suscrito exitosamente. Revisa tu correo para más detalles.' });
+    console.log(`Nuevo suscriptor: ${name}, ${email}, ${list}`);
+  } catch (error) {
+    console.error('Error enviando email:', error.message);
+    res.status(500).json({ message: 'Error al suscribirse. Por favor, intenta nuevamente.', error: error.message });
+  }
 });
+
+

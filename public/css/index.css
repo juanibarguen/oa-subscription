@@ -348,6 +348,7 @@ body {
   .respuesta.active {
     max-height: 1000px; /* Altura máxima que quieres que tenga la respuesta desplegada */
     min-height: 30px;
+    padding: 0 10px 12px;
   }
 
   

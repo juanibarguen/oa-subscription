@@ -9,7 +9,7 @@ body {
 .data-sub {
     display: flex;
     justify-content: center;
-    padding: 120px 25px 0;
+    padding: 120px 25px 70px;
     background-color: #FFF3EC;
 }
 
@@ -21,7 +21,7 @@ body {
 
 .form-sub {
    max-width: 500px;
-    padding: 10px;
+    padding: 20px;
     color: #293343;
     background-color: #fff;
 }
@@ -29,6 +29,7 @@ body {
 form input {
     width: 98%;
     height: 50px;
+    padding: 5px;
 }
 
 form button {
@@ -70,7 +71,7 @@ form button {
 
 .card-top {
     color: #293343;
-    padding: 10px;
+    padding: 20px 20px 10px;
     row-gap: 10px;
     background: #fff;
     display: flex;
@@ -82,6 +83,7 @@ form button {
 .card-under {
     color: #293343;
     background-color: #fff;
+    padding: 0 20px 20px;
 }
 
 .card-under ul {

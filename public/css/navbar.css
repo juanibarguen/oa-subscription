@@ -84,7 +84,7 @@
 }
 
 .nav__links{
-    background-color: rgb(48, 48, 48);
+    background-color: #102247;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -106,7 +106,7 @@
 }
 
 .nav__link{
-    color: #34465E;
+    color: #787878;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 600;

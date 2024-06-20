@@ -21,6 +21,7 @@
 }
 
 .container-content-footer {
+    column-gap: 80px;
     display: flex;
     justify-content: space-between;
     padding: 50px 0 80px;
@@ -126,4 +127,38 @@
 #selected {
     font-weight: 800;
     color: orange;
+}
+
+
+
+
+@media (max-width: 990px){
+
+    .container-content-footer {
+        flex-direction: column;
+        height: auto;
+        row-gap: 50px;
+    }
+
+    .content-footer-links {
+        justify-content: flex-start;
+    }
+
+    #linksServicios {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .sub-entrada input {
+        width: 100%;
+    }
+    
+    .container-footer { 
+        padding: 0 30px;
+     } 
+    .container-content-footer {
+        padding: 40px 0 20px;
+    }
 }
