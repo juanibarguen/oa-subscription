@@ -134,6 +134,35 @@
         </div>
     </footer>
 
+<script>
+        document.getElementById('subscribeButton').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('footerNS').value;
+            
+            try {
+                const response = await fetch('/subscribe-newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(result.message);
+                    // Puedes resetear el formulario si lo deseas
+                    document.getElementById('footerNS').value = '';
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('Error de red');
+            }
+        });
+        
+</script>
 
     <script src="./menu-responsive.js"></script>
 </body>
