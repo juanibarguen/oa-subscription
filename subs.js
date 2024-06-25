@@ -8,11 +8,11 @@ const { Resend } = require('resend');
 
 require('dotenv').config();
 
-//CLAVE OA SNIPERS
-const resend = new Resend('re_fKbEXktf_AvVJubBbC7BE3bHFCWkk6x8W');
+//CLAVE PRUEBA JUANI  
+const resend = new Resend('re_DoVa6i88_DpXXbxKdxbzDTiAqz62YmaXU');
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const CLIENT_ID = 'AWBRM0MlAogvyWWk8uCHllzE1yWnhC2NXolqyNhptMOP0LvHGjHb_SxOs_Lg9qStJhlLP-pWBB1ncm-C';
+const CLIENT_SECRET = 'EGd6uGugKlDbZFGq_JJ4Uh2VXeW-T3IzbF-Yg1jMN_yBHTZrK7qCtQpGboj7PEMHvkeHIx9sxpmT7Bo7';
 const PORT = 3000;
 
 let planIds = {};
@@ -26,7 +26,7 @@ async function getAccessToken() {
   try {
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.paypal.com/v1/oauth2/token',
+      url: 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -55,7 +55,7 @@ async function createProduct(name, description) {
 
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.paypal.com/v1/catalogs/products',
+      url: 'https://api-m.sandbox.paypal.com/v1/catalogs/products',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -133,7 +133,7 @@ async function createPlan(productId, name, description, price1, price2) {
       
     const response = await axios({
       method: 'post',
-      url: 'https://api-m.paypal.com/v1/billing/plans',
+      url: 'https://api-m.sandbox.paypal.com/v1/billing/plans',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -199,33 +199,35 @@ let emailForm;
 
 
 app.get('/success', (req, res) => {
-
   const { subscription_id, ba_token, token } = req.query;
 
   if (!subscription_id) {
     return res.status(400).send('Subscription ID not provided');
   }
 
-  // Aquí puedes realizar cualquier lógica adicional, como verificar el estado de la suscripción
-  //console.log('Subscription ID:', subscription_id);
-  //console.log('BA Token:', ba_token);
-  //console.log('Token:', token);
-  //console.log("ME LA RE BANCOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
   console.log(nombreForm);
   console.log(apellidoForm);
   console.log(emailForm);
+  console.log(listaForm); // Mostrar la lista recibida
 
-
-resend.emails.send({
+  resend.emails.send({
     from: 'oasnipers@resend.dev',
     to: emailForm,
     subject: 'Bienvenido a OA Snipers',
-    html: `Hola ${nombreForm} bienvenido a la lista, tu pago se registro con exito`
+    html: `Hola ${nombreForm} bienvenido a la lista ${listaForm}, tu pago se registró con éxito.`
   });
 
-  // Respondemos con un mensaje de éxito
-  res.send('<h1>Gracias por tu pago</h1><p>Tu suscripción ha sido creada con éxito.</p>');
+  resend.emails.send({
+    from: 'oasnipers@resend.dev',
+    to: 'juanibarguen159@gmail.com',
+    subject: `Nueva suscripción de ${nombreForm}`,
+    html: `Nueva suscripción de ${nombreForm} ${apellidoForm} a la lista ${listaForm}, el pago se registró con éxito. Correo a agregar: ${emailForm}`
+  });
+
+  res.send('<h1>Gracias por tu pago</h1><p>Tu suscripción ha sido creada con éxito.</h1>');
 });
+
+
 
 
 // Manejador de la ruta '/cancel'
@@ -248,7 +250,7 @@ app.post('/subscribe/:planId', async (req, res) => {
 
 
 // Función para crear una suscripción
-async function createSubscription(planId, firstName, lastName, email) {
+async function createSubscription(planId, firstName, lastName, email, list) {
   try {
     const accessToken = await getAccessToken();
 
@@ -272,27 +274,28 @@ async function createSubscription(planId, firstName, lastName, email) {
         },
         return_url: 'http://localhost:3000/success',
         cancel_url: 'http://localhost:3000/cancel'
-        //,return_url: 'https://oa-subscription.onrender.com/success',
-        //cancel_url: 'https://oa-subscription.onrender.com/cancel'
       }
     };
 
-    const response = await axios.post('https://api-m.paypal.com/v1/billing/subscriptions', subscriptionData, {
+    const response = await axios.post('https://api-m.sandbox.paypal.com/v1/billing/subscriptions', subscriptionData, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       }
     });
 
-    nombreForm = firstName
-    apellidoForm = lastName
-    emailForm = email
+    nombreForm = firstName;
+    apellidoForm = lastName;
+    emailForm = email;
+    listaForm = list; // Guardar la lista en una variable global
     return response.data;
   } catch (error) {
     console.error('Error creating subscription:', error.response ? error.response.data : error.message);
     throw new Error('Failed to create subscription');
   }
 }
+
+
 
 // Ruta para manejar la suscripción del plan Mixta
 app.post('/subscribe-mixta', async (req, res) => {
@@ -307,17 +310,21 @@ app.post('/subscribe-mixta', async (req, res) => {
 });
 
 // Ruta para manejar la suscripción del plan Ungated
-
 app.post('/subscribe-ungated', async (req, res) => {
-  const { firstName, lastName, email } = req.body;
+  const { firstName, lastName, email, list } = req.body;
+
+  if (!list) {
+    return res.status(400).json({ error: 'List is required' });
+  }
 
   try {
-    const subscriptionResponse = await createSubscription(ungatedPlanId, firstName, lastName, email);
+    const subscriptionResponse = await createSubscription(ungatedPlanId, firstName, lastName, email, list);
     res.json({ approvalUrl: subscriptionResponse.links.find(link => link.rel === 'approve').href });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create PayPal subscription' });
   }
 });
+
 
 // Ruta para manejar la suscripción del plan Exclusive
 app.post('/subscribe-exclusive', async (req, res) => {
@@ -385,6 +392,15 @@ app.post('/subscribe-newsletter', async (req, res) => {
       subject: 'Suscripción a la Newsletter',
       html: `<p>Hola,</p><p>Gracias por suscribirte a nuestra newsletter. Ahora recibirás anuncios, novedades de blog y cursos directamente en tu correo.</p><p>Saludos,<br>El equipo de OA Snipers</p>`
     });
+
+    resend.emails.send({
+      from: 'oasnipers@resend.dev',
+      to: 'oasnipers21@gmail.com',
+      subject: `Nueva suscripciona de ${nombreForm} a newsletter`,
+      html: `Nueva suscripcion de  ${nombreForm} ${apellidoForm} a la newsletter. Correo a agregar: ${emailForm}`
+    });
+
+
     res.status(200).json({ message: 'Te has suscrito exitosamente. Revisa tu correo para más detalles.' });
     console.log("Nuevo suscriptor: " + email);
   } catch (error) {
